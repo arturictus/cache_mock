@@ -9,6 +9,7 @@ RSpec.describe CacheMock do
   end
   it "writing and reading to the cache" do
     expect(subject.fetch("foo") { "bar" }).to eq "bar"
+    expect(subject.fetch("foo")).to eq "bar"
     expect(subject.write("bar", "foo")).to eq "foo"
     expect(subject.read("foo")).to eq "bar"
     expect(subject.read("no_foo")).to be nil

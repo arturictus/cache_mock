@@ -10,12 +10,10 @@ class CacheMock
 
     if exist?(key)
       # fetch and return result
-      puts "fetch from cache and will expire in #{db[key][:expiration_time] - Time.now.to_i}"
       db[key][:value]
     else
       if block_given?
         # make the DB query and create a new entry for the request result
-        puts "did not find key in cache, executing block ..."
         db[key] = build_record(options, &block)
         db[key][:value]
       else
