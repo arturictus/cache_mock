@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["arturictus@gmail.com"]
 
   spec.summary       = %q{Cache Mock for testing}
-  spec.description   = %q{Cache Mock for testing, test your cache.}
+  spec.description   = %q{Very basic cache implementation for testing purposes only.}
   spec.homepage      = "https://github.com/arturictus/cache_mock"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

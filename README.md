@@ -1,8 +1,8 @@
 # CacheMock
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cache_mock`. To experiment with that code, run `bin/console` for an interactive prompt.
+Very basic cache implementation for testing purposes only.
 
-TODO: Delete this and the text above, and describe your gem
+__This is not a production Cache.__
 
 ## Installation
 
@@ -22,7 +22,32 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+RSpec.describe CacheMock do
+
+  subject { described_class.new }
+  before do
+    subject.clear
+  end
+  it "writing and reading to the cache" do
+    expect(subject.fetch("foo") { "bar" }).to eq "bar"
+    expect(subject.write("bar", "foo")).to eq "foo"
+    expect(subject.read("foo")).to eq "bar"
+    expect(subject.read("no_foo")).to be nil
+    expect(subject.exist?("foo")).to be true
+    expect(subject.exist?("no_foo")).to be false
+  end
+
+  it "#clear resets the whole db" do
+    expect(subject.write("bar", "foo")).to eq "foo"
+    expect(subject.read("bar")).to eq "foo"
+    subject.clear
+    expect(subject.read("bar")).to be nil
+    expect(subject.db).to eq({})
+  end
+end
+```
+
 
 ## Development
 
@@ -36,4 +61,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 
 ## Code of Conduct
 
-Everyone interacting in the CacheMock project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/cache_mock/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the CacheMock project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/arturictus/cache_mock/blob/master/CODE_OF_CONDUCT.md).
